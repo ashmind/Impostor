@@ -25,6 +25,9 @@ namespace Impostor {
             var fileName = DateTime.Now.Ticks + "-" + Guid.NewGuid() + ".txt";
             var filePath = Path.Combine(_settings.RecordDirectoryPath, fileName);
             using (var writer = new StreamWriter(filePath)) {
+                await writer.WriteLineAsync(request.Method + " " + request.Uri);
+                await writer.WriteLineAsync();
+
                 var maxHeaderWidth = request.Headers.Max(h => h.Key.Length);
                 foreach (var header in request.Headers) {
                     foreach (var value in header.Value) {

@@ -50,9 +50,7 @@
   <ItemGroup>
     <Compile Include="Internal\MapNamingConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RuleYaml.cs" />
     <Compile Include="YamlSettingsParser.cs" />
-    <Compile Include="SettingsYaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

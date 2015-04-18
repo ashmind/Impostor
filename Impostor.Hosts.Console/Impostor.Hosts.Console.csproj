@@ -78,8 +78,15 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Settings.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Impostor.Settings.Yaml\Impostor.Settings.Yaml.csproj">
+      <Project>{77931836-4731-47D9-BF21-1F8044046E0C}</Project>
+      <Name>Impostor.Settings.Yaml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Impostor\Impostor.csproj">
       <Project>{711e7212-b65a-4ee9-afc5-f186eca5c009}</Project>
       <Name>Impostor</Name>

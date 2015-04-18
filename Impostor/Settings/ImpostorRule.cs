@@ -8,7 +8,7 @@ namespace Impostor.Settings {
             StatusCode = 200;
         }
 
-        public string UrlPath { get; set; }
+        public string RequestUrlPath { get; set; }
         public int StatusCode { get; set; }
         public string ResponsePath { get; set; }
     }

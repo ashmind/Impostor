@@ -1,0 +1,4 @@
+﻿request_log: .\{ticks}-{guid}.txt
+rules:
+    - url:    /test
+      status: 200

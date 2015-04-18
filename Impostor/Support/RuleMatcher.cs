@@ -18,7 +18,7 @@ namespace Impostor.Support {
         }
 
         private bool IsMatch(IOwinRequest request, ImpostorRule rule) {
-            return string.Equals(rule.UrlPath, request.Uri.AbsolutePath, StringComparison.InvariantCultureIgnoreCase);
+            return string.Equals(rule.RequestUrlPath, request.Uri.AbsolutePath, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

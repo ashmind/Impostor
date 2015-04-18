@@ -10,7 +10,7 @@ namespace Impostor {
             Rules = new List<ImpostorRule>();
         }
 
-        public string RecordDirectoryPath { get; set; }
+        public string RequestLogPath { get; set; }
         [NotNull, ItemNotNull]
         public IList<ImpostorRule> Rules { get; private set; }
     }

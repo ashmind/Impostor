@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostor", "Impostor\Impost
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostor.Hosts.Console", "Impostor.Hosts.Console\Impostor.Hosts.Console.csproj", "{7B6DAECD-0C48-4676-A9AD-A6D07A33FE9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostor.Settings.Yaml", "Impostor.Settings.Yaml\Impostor.Settings.Yaml.csproj", "{77931836-4731-47D9-BF21-1F8044046E0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostor.Tests.Unit", "Impostor.Tests.Unit\Impostor.Tests.Unit.csproj", "{2222D610-8020-4CC5-B893-6909F4EC1D86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{7B6DAECD-0C48-4676-A9AD-A6D07A33FE9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B6DAECD-0C48-4676-A9AD-A6D07A33FE9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B6DAECD-0C48-4676-A9AD-A6D07A33FE9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77931836-4731-47D9-BF21-1F8044046E0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77931836-4731-47D9-BF21-1F8044046E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77931836-4731-47D9-BF21-1F8044046E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77931836-4731-47D9-BF21-1F8044046E0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2222D610-8020-4CC5-B893-6909F4EC1D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2222D610-8020-4CC5-B893-6909F4EC1D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2222D610-8020-4CC5-B893-6909F4EC1D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2222D610-8020-4CC5-B893-6909F4EC1D86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

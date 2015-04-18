@@ -37,9 +37,7 @@ namespace Impostor {
             var request = context.Request;
             Logger.InfoFormat("{0:l} {1}", request.Method, request.Uri);
 
-            var requestFileName = DateTime.Now.Ticks + "-" + Guid.NewGuid() + ".txt";
-            var requestFilePath = Path.Combine(_settings.RecordDirectoryPath, requestFileName);
-            await _recorder.RecordAsync(requestFilePath, request);
+            await _recorder.RecordAsync(_settings.RequestLogPath, request);
 
             var rule = _matcher.Match(request, _settings.Rules);
             if (rule != null) {

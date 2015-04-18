@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using Impostor.Settings;
+using Impostor.Settings.Yaml;
 using Microsoft.Owin.Hosting;
 using Microsoft.Owin.Logging;
 using Owin;
@@ -63,14 +64,10 @@ namespace Impostor.Hosts.Console {
             app.SetLoggerFactory(new SerilogWeb.Owin.LoggerFactory(Log.Logger));
             // ReSharper disable once RedundantArgumentDefaultValue
             app.UseSerilogRequestContext("RequestId");
-            app.UseImpostor(new ImpostorSettings {
-                RecordDirectoryPath = ".",
-                Rules = {
-                    new ImpostorRule {
-                        UrlPath = "/test"
-                    }
-                }
-            });
+            app.UseImpostor(
+                new YamlSettingsParser()
+                    .Parse(File.ReadAllText("Settings.yaml"))
+            );
         }
     }
 }

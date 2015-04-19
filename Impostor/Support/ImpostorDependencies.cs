@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 
 namespace Impostor.Support {
     public class ImpostorDependencies {
+        // TODO: Change all dependencies to interfaces
         public ImpostorDependencies(
             [CanBeNull] IIOFactory ioFactory = null,
             [CanBeNull] MessageSerializer messageSerializer = null,

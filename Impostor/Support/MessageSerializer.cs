@@ -46,7 +46,7 @@ namespace Impostor.Support {
 
             var text = await reader.ReadToEndAsync();
             var parts = Regex.Match(text, @"^
-                (?<status>.+)
+                (?<status>[^\r\n]+)
                 (?:
                     (?:\r\n|\r|\n){2}
                     (?<headers>.*)
@@ -77,7 +77,7 @@ namespace Impostor.Support {
                 var headerLines = Regex.Split(headerGroup.Value, @"\r\n|\r|\n");
                 foreach (var line in headerLines) {
                     var header = line.Split(':');
-                    result += r => r.Headers.Append(header[0], header[1]);
+                    result += r => r.Headers.Append(header[0].Trim(), header[1].Trim());
                 }
             }
 

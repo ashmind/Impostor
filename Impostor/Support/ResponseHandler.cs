@@ -10,10 +10,13 @@ using Microsoft.Owin;
 namespace Impostor.Support {
     public class ResponseHandler {
         private readonly MessageSerializer _serializer;
+        private readonly IIOFactory _ioFactory;
 
-        public ResponseHandler([NotNull] MessageSerializer serializer) {
+        public ResponseHandler([NotNull] IIOFactory ioFactory, [NotNull] MessageSerializer serializer) {
             if (serializer == null) throw new ArgumentNullException("serializer");
+            if (ioFactory == null) throw new ArgumentNullException("ioFactory");
             _serializer = serializer;
+            _ioFactory = ioFactory;
         }
 
         public async Task ProcessResponseAsync([NotNull] IOwinResponse response, [NotNull] Rule rule) {
@@ -39,13 +42,17 @@ namespace Impostor.Support {
             if (string.IsNullOrEmpty(rule.Response.ContentPath))
                 return;
 
-            var responseBytes = File.ReadAllBytes(rule.Response.ContentPath);
-            response.ContentLength = responseBytes.Length;
-            response.Body = new MemoryStream(responseBytes);
+            using (var bodyStream = _ioFactory.CreateReadStream(rule.Response.ContentPath)) {
+                var bytes = new byte[bodyStream.Length];
+                await bodyStream.ReadAsync(bytes, 0, bytes.Length);
+
+                response.ContentLength = bytes.Length;
+                response.Body = new MemoryStream(bytes);
+            }
         }
 
         private async Task<Action<IOwinResponse>> ReadResponseAsync(string responsePath) {
-            using (var reader = File.OpenText(responsePath)) {
+            using (var reader = _ioFactory.CreateTextReader(responsePath)) {
                 return await _serializer.DeserializeResponseAsync(reader);
             }
         }

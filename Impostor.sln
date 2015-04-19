@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostor.Tests.Unit", "Impo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostor.Tests.Integration", "Impostor.Tests.Integration\Impostor.Tests.Integration.csproj", "{467873E0-031A-4D60-BDF3-46E0C1CBE635}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostor.Hosts.Web", "Impostor.Hosts.Web\Impostor.Hosts.Web.csproj", "{A437CE24-728E-4465-B9AF-3AE104EB3262}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{467873E0-031A-4D60-BDF3-46E0C1CBE635}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{467873E0-031A-4D60-BDF3-46E0C1CBE635}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{467873E0-031A-4D60-BDF3-46E0C1CBE635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A437CE24-728E-4465-B9AF-3AE104EB3262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A437CE24-728E-4465-B9AF-3AE104EB3262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A437CE24-728E-4465-B9AF-3AE104EB3262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A437CE24-728E-4465-B9AF-3AE104EB3262}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

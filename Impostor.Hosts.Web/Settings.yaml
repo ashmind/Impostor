@@ -1,0 +1,11 @@
+﻿request_log: ~/App_Data/Requests/{$now:yyyy-MM-dd--HH-mm-ss}.txt
+rules:
+  - url:    /test
+    response:
+      status:    200
+
+  - url:    /test/body_path
+    response:
+      status:    200
+      type:      text/plain
+      body_path: ~/App_Data/Responses/TestBody.txt

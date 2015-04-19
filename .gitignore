@@ -4,3 +4,4 @@
 bin/
 obj/
 \#packages/
+/Impostor.Hosts.Web/App_Data/Requests

@@ -86,7 +86,7 @@ namespace Impostor.Support {
                 result += r => {
                     var bytes = Encoding.UTF8.GetBytes(bodyGroup.Value);
                     r.ContentLength = bytes.Length;
-                    r.Body = new MemoryStream(bytes);
+                    r.Body.Write(bytes, 0, bytes.Length);
                 };
             }
 

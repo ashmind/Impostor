@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Impostor.Settings;
@@ -43,11 +42,8 @@ namespace Impostor.Support {
                 return;
 
             using (var bodyStream = _ioFactory.CreateReadStream(rule.Response.ContentPath)) {
-                var bytes = new byte[bodyStream.Length];
-                await bodyStream.ReadAsync(bytes, 0, bytes.Length);
-
-                response.ContentLength = bytes.Length;
-                response.Body = new MemoryStream(bytes);
+                response.ContentLength = bodyStream.Length;
+                await bodyStream.CopyToAsync(response.Body);
             }
         }
 

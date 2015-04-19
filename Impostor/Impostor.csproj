@@ -60,7 +60,6 @@
     <Compile Include="Settings\Rule.cs" />
     <Compile Include="Settings\ImpostorSettingsException.cs" />
     <Compile Include="Settings\RuleResponse.cs" />
-    <Compile Include="Support\DictionaryExtensions.cs" />
     <Compile Include="Support\IIOFactory.cs" />
     <Compile Include="Support\VariableInterpolator.cs" />
     <Compile Include="Support\IOFactory.cs" />

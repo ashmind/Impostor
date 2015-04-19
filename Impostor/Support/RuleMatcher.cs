@@ -13,11 +13,11 @@ namespace Impostor.Support {
         }
 
         [CanBeNull]
-        public ImpostorRule Match([NotNull] IOwinRequest request, [NotNull] IEnumerable<ImpostorRule> rules) {
+        public Rule Match([NotNull] IOwinRequest request, [NotNull] IEnumerable<Rule> rules) {
             return rules.FirstOrDefault(r => IsMatch(request, r));
         }
 
-        private bool IsMatch(IOwinRequest request, ImpostorRule rule) {
+        private bool IsMatch(IOwinRequest request, Rule rule) {
             return string.Equals(rule.RequestUrlPath, request.Uri.AbsolutePath, StringComparison.InvariantCultureIgnoreCase);
         }
     }

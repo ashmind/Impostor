@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Impostor.Logging;
 using Impostor.Support;
@@ -10,24 +11,24 @@ using Microsoft.Owin;
 
 namespace Impostor {
     public class ImpostorMiddleware : OwinMiddleware {
-        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
-
-        private readonly RequestRecorder _recorder;
+        private readonly MessageSerializer _serializer;
         private readonly RuleMatcher _matcher;
+        private readonly ResponseHandler _responseHandler;
         private readonly ImpostorSettings _settings;
+        private readonly ILog _logger;
 
         public ImpostorMiddleware(
             OwinMiddleware next,
-            [NotNull] RequestRecorder recorder,
-            [NotNull] RuleMatcher matcher,
+            [NotNull] ImpostorDependencies dependencies,
             [NotNull] ImpostorSettings settings
         ) : base(next) {
             if (settings == null) throw new NullReferenceException("settings");
-            if (recorder == null) throw new NullReferenceException("recorder");
-            if (matcher == null) throw new NullReferenceException("matcher");
-            _recorder = recorder;
-            _matcher = matcher;
+            if (dependencies == null) throw new NullReferenceException("dependencies");
+            _serializer = dependencies.MessageSerializer;
+            _matcher = dependencies.RuleMatcher;
+            _responseHandler = dependencies.ResponseHandler;
             _settings = settings;
+            _logger = dependencies.LoggerFactory(GetType());
         }
 
         [NotNull]
@@ -35,18 +36,21 @@ namespace Impostor {
             if (context == null) throw new NullReferenceException("context");
 
             var request = context.Request;
-            Logger.InfoFormat("{0:l} {1}", request.Method, request.Uri);
+            _logger.InfoFormat("{0:l} {1}", request.Method, request.Uri);
 
-            await _recorder.RecordAsync(_settings.RequestLogPath, request);
+            if (_settings.RequestLogPath != null) {
+                using (var writer = new StreamWriter(_settings.RequestLogPath)) {
+                    await _serializer.SerializeRequestAsync(writer, request);
+                }
+            }
 
             var rule = _matcher.Match(request, _settings.Rules);
             if (rule != null) {
-                Logger.DebugFormat("Request was matched by {0}.", rule);
-                var response = context.Response;
-                response.StatusCode = rule.StatusCode;
+                _logger.DebugFormat("Request was matched by {0}.", rule);
+                await _responseHandler.ProcessResponseAsync(context.Response, rule);
             }
             else {
-                Logger.DebugFormat("Request was not matched by any rule.");
+                _logger.DebugFormat("Request was not matched by any rule.");
                 await Next.Invoke(context);
             }
         }

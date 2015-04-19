@@ -14,8 +14,8 @@ namespace Impostor.Tests.Unit.Of.Settings.Yaml {
             "{RequestLogPath:'./{ticks}-{guid}.txt',Rules:[]}"
         )]
         [InlineData(
-            "rules:\r\n  - url: /test\r\n    status: 200",
-            "{Rules:[{RequestUrlPath:'/test',StatusCode:200}]}"
+            "rules:\r\n  - url: /test\r\n    response:\r\n      status: 200",
+            "{Rules:[{RequestUrlPath:'/test',Response:{StatusCode:200}}]}"
         )]
         public void Parse_ReturnsExpectedSettings(string settingsString, string expectedLiteJson) {
             var parsed = new YamlSettingsParser().Parse(settingsString);

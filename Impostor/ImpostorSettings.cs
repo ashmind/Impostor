@@ -5,13 +5,14 @@ using Impostor.Settings;
 using JetBrains.Annotations;
 
 namespace Impostor {
+    [PublicAPI]
     public class ImpostorSettings {
         public ImpostorSettings() {
-            Rules = new List<ImpostorRule>();
+            Rules = new List<Rule>();
         }
 
-        public string RequestLogPath { get; set; }
+        [CanBeNull] public string RequestLogPath { get; set; }
         [NotNull, ItemNotNull]
-        public IList<ImpostorRule> Rules { get; private set; }
+        public IList<Rule> Rules { get; private set; }
     }
 }

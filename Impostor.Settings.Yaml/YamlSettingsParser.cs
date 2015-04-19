@@ -9,12 +9,15 @@ using YamlDotNet.Serialization;
 
 namespace Impostor.Settings.Yaml {
     public class YamlSettingsParser {
-        private readonly IReadOnlyDictionary<string, string> NameMap = new Dictionary<string, string> {
+        private static readonly IReadOnlyDictionary<string, string> NameMap = new Dictionary<string, string> {
             { Info.PropertyOf<ImpostorSettings>(s => s.RequestLogPath).Name, "request_log" },
-            { Info.PropertyOf<ImpostorSettings>(s => s.Rules).Name,         "rules" },
-            { Info.PropertyOf<ImpostorRule>(r => r.RequestUrlPath).Name,    "url" },
-            { Info.PropertyOf<ImpostorRule>(r => r.StatusCode).Name,        "status" },
-            { Info.PropertyOf<ImpostorRule>(r => r.ResponsePath).Name,      "response" }
+            { Info.PropertyOf<ImpostorSettings>(s => s.Rules).Name,          "rules" },
+            { Info.PropertyOf<Rule>(r => r.RequestUrlPath).Name,             "url" },
+            { Info.PropertyOf<Rule>(r => r.ResponsePath).Name,               "response_path" },
+            { Info.PropertyOf<Rule>(r => r.Response).Name,                   "response" },
+            { Info.PropertyOf<RuleResponse>(r => r.StatusCode).Name,         "status" },
+            { Info.PropertyOf<RuleResponse>(r => r.ContentType).Name,        "type" },
+            { Info.PropertyOf<RuleResponse>(r => r.ContentPath).Name,        "body_path" },
         };
             
         [NotNull]

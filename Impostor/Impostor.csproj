@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;JETBRAINS_ANNOTATIONS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;JETBRAINS_ANNOTATIONS; LIBLOG_PUBLIC</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -25,7 +25,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;JETBRAINS_ANNOTATIONS</DefineConstants>
+    <DefineConstants>TRACE;JETBRAINS_ANNOTATIONS; LIBLOG_PUBLIC</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -54,9 +54,12 @@
     <Compile Include="ImpostorSettings.cs" />
     <Compile Include="ImpostorMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\ImpostorRule.cs" />
-    <Compile Include="Settings\ImpostorSettingsLoadException.cs" />
-    <Compile Include="Support\RequestRecorder.cs" />
+    <Compile Include="Settings\Rule.cs" />
+    <Compile Include="Settings\ImpostorSettingsException.cs" />
+    <Compile Include="Settings\RuleResponse.cs" />
+    <Compile Include="Support\ImpostorDependencies.cs" />
+    <Compile Include="Support\MessageSerializer.cs" />
+    <Compile Include="Support\ResponseHandler.cs" />
     <Compile Include="Support\RuleMatcher.cs" />
     <Compile Include="AppBuilderExtensions.cs" />
   </ItemGroup>

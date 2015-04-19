@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Impostor.Logging;
 using Impostor.Settings;
 using JetBrains.Annotations;
 using Microsoft.Owin;
 
 namespace Impostor.Support {
-    public class RuleMatcher {
-        public RuleMatcher() {
-            
-        }
-
+    public class RequestMatcher {
         [CanBeNull]
         public Rule Match([NotNull] IOwinRequest request, [NotNull] IEnumerable<Rule> rules) {
             return rules.FirstOrDefault(r => IsMatch(request, r));

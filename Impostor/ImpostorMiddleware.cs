@@ -33,12 +33,13 @@ namespace Impostor {
             _logger.InfoFormat("{0:l} {1}", request.Method, request.Uri);
 
             if (_settings.RequestLogPath != null) {
-                using (var writer = _services.IOFactory.CreateTextWriter(_settings.RequestLogPath)) {
+                var interpolatedPath = _services.VariableInterpolator.Interpolate(_settings.RequestLogPath);
+                using (var writer = _services.IOFactory.CreateTextWriter(interpolatedPath)) {
                     await _services.MessageSerializer.SerializeRequestAsync(writer, request);
                 }
             }
 
-            var rule = _services.RuleMatcher.Match(request, _settings.Rules);
+            var rule = _services.RequestMatcher.Match(request, _settings.Rules);
             if (rule != null) {
                 _logger.DebugFormat("Request was matched by {0}.", rule);
                 await _services.ResponseHandler.ProcessResponseAsync(context.Response, rule);

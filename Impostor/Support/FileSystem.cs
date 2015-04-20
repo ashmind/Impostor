@@ -4,7 +4,11 @@ using System.IO;
 using System.Linq;
 
 namespace Impostor.Support {
-    public class IOFactory : IIOFactory {
+    public class FileSystem : IFileSystem {
+        public void EnsureDirectory(string path) {
+            Directory.CreateDirectory(path);
+        }
+
         public TextWriter CreateTextWriter(string path) {
             return new StreamWriter(path);
         }

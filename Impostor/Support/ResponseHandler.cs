@@ -9,13 +9,13 @@ using Microsoft.Owin;
 namespace Impostor.Support {
     public class ResponseHandler {
         private readonly MessageSerializer _serializer;
-        private readonly IIOFactory _ioFactory;
+        private readonly IFileSystem _fileSystem;
 
-        public ResponseHandler([NotNull] IIOFactory ioFactory, [NotNull] MessageSerializer serializer) {
+        public ResponseHandler([NotNull] IFileSystem fileSystem, [NotNull] MessageSerializer serializer) {
             if (serializer == null) throw new ArgumentNullException("serializer");
-            if (ioFactory == null) throw new ArgumentNullException("ioFactory");
+            if (fileSystem == null) throw new ArgumentNullException("fileSystem");
             _serializer = serializer;
-            _ioFactory = ioFactory;
+            _fileSystem = fileSystem;
         }
 
         public async Task ProcessResponseAsync([NotNull] IOwinResponse response, [NotNull] Rule rule) {
@@ -41,14 +41,14 @@ namespace Impostor.Support {
             if (string.IsNullOrEmpty(rule.Response.ContentPath))
                 return;
 
-            using (var bodyStream = _ioFactory.CreateReadStream(rule.Response.ContentPath)) {
+            using (var bodyStream = _fileSystem.CreateReadStream(rule.Response.ContentPath)) {
                 response.ContentLength = bodyStream.Length;
                 await bodyStream.CopyToAsync(response.Body);
             }
         }
 
         private async Task<Action<IOwinResponse>> ReadResponseAsync(string responsePath) {
-            using (var reader = _ioFactory.CreateTextReader(responsePath)) {
+            using (var reader = _fileSystem.CreateTextReader(responsePath)) {
                 return await _serializer.DeserializeResponseAsync(reader);
             }
         }

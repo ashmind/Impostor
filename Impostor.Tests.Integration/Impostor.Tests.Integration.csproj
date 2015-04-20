@@ -69,7 +69,7 @@
     <Compile Include="BasicTests.cs" />
     <Compile Include="IntegrationTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Support\MemoryIOFactory.cs" />
+    <Compile Include="Support\MemoryFileSystem.cs" />
     <Compile Include="Support\TestOutputLogger.cs" />
   </ItemGroup>
   <ItemGroup>

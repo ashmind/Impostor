@@ -6,8 +6,8 @@ using System.Text;
 using Impostor.Support;
 
 namespace Impostor.Tests.Integration.Support {
-    public class MemoryIOFactory : IIOFactory {
-        public MemoryIOFactory() {
+    public class MemoryFileSystem : IFileSystem {
+        public MemoryFileSystem() {
             Streams = new Dictionary<string, MemoryStream>();
         }
 
@@ -16,7 +16,10 @@ namespace Impostor.Tests.Integration.Support {
         public void SetAllText(string path, string text) {
             Streams[path] = new MemoryStream(Encoding.UTF8.GetBytes(text));
         }
-        
+
+        public void EnsureDirectory(string path) {
+        }
+
         public TextWriter CreateTextWriter(string path) {
             var stream = GetStreamOrNull(path);
             if (stream == null) {

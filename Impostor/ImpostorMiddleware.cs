@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Impostor.Logging;
@@ -34,7 +35,11 @@ namespace Impostor {
 
             if (_settings.RequestLogPath != null) {
                 var interpolatedPath = _services.VariableInterpolator.Interpolate(_settings.RequestLogPath);
-                using (var writer = _services.IOFactory.CreateTextWriter(interpolatedPath)) {
+                var directoryPath = Path.GetDirectoryName(interpolatedPath);
+                if (directoryPath != null)
+                    _services.FileSystem.EnsureDirectory(directoryPath);
+
+                using (var writer = _services.FileSystem.CreateTextWriter(interpolatedPath)) {
                     await _services.MessageSerializer.SerializeRequestAsync(writer, request);
                 }
             }

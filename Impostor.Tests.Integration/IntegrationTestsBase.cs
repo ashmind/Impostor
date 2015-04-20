@@ -14,7 +14,7 @@ namespace Impostor.Tests.Integration {
 
         protected IntegrationTestsBase(ITestOutputHelper output) {
             _output = output;
-            IOFactory = new MemoryIOFactory();
+            FileSystem = new MemoryFileSystem();
         }
 
         protected TestServer CreateServer(params Rule[] rules) {
@@ -29,7 +29,7 @@ namespace Impostor.Tests.Integration {
             var server = TestServer.Create(app => {
                 app.UseImpostor(settings, new ImpostorDependencies(
                     // ReSharper disable once RedundantArgumentName
-                    ioFactory: IOFactory,
+                    fileSystem: FileSystem,
                     loggerFactory: t => new TestOutputLogger(_output, t.Name)
                 ));
             });
@@ -37,7 +37,7 @@ namespace Impostor.Tests.Integration {
             return server;
         }
 
-        protected MemoryIOFactory IOFactory { get; private set; }
+        protected MemoryFileSystem FileSystem { get; private set; }
 
         public virtual void Dispose() {
             foreach (var server in _servers) {

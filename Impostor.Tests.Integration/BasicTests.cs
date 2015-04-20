@@ -19,7 +19,7 @@ namespace Impostor.Tests.Integration {
             });
             await server.CreateRequest("/").GetAsync();
 
-            Assert.True(IOFactory.Streams.ContainsKey(year + ".txt"));
+            Assert.True(FileSystem.Streams.ContainsKey(year + ".txt"));
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Impostor.Tests.Integration {
         }
 
         private Rule CreateRuleWithResponseFile(string urlPath, string responseFileText) {
-            IOFactory.SetAllText("response.txt", responseFileText);
+            FileSystem.SetAllText("response.txt", responseFileText);
             return new Rule { RequestUrlPath = urlPath, ResponsePath = "response.txt" };
         }
     }

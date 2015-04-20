@@ -60,9 +60,9 @@
     <Compile Include="Settings\Rule.cs" />
     <Compile Include="Settings\ImpostorSettingsException.cs" />
     <Compile Include="Settings\RuleResponse.cs" />
-    <Compile Include="Support\IIOFactory.cs" />
+    <Compile Include="Support\IFileSystem.cs" />
     <Compile Include="Support\VariableInterpolator.cs" />
-    <Compile Include="Support\IOFactory.cs" />
+    <Compile Include="Support\FileSystem.cs" />
     <Compile Include="Support\ImpostorDependencies.cs" />
     <Compile Include="Support\MessageSerializer.cs" />
     <Compile Include="Support\ResponseHandler.cs" />

@@ -8,22 +8,22 @@ namespace Impostor.Support {
     public class ImpostorDependencies {
         // TODO: Change all dependencies to interfaces
         public ImpostorDependencies(
-            [CanBeNull] IIOFactory ioFactory = null,
+            [CanBeNull] IFileSystem fileSystem = null,
             [CanBeNull] MessageSerializer messageSerializer = null,
             [CanBeNull] RequestMatcher requestMatcher = null,
-            [CanBeNull] Func<IIOFactory, MessageSerializer, ResponseHandler> responseHandlerFactory = null,
+            [CanBeNull] Func<IFileSystem, MessageSerializer, ResponseHandler> responseHandlerFactory = null,
             [CanBeNull] VariableInterpolator variableInterpolator = null,
             [CanBeNull] Func<Type, ILog> loggerFactory = null
         ) {
-            ioFactory = ioFactory ?? new IOFactory();
+            fileSystem = fileSystem ?? new FileSystem();
             messageSerializer = messageSerializer ?? new MessageSerializer();
             requestMatcher = requestMatcher ?? new RequestMatcher();
             variableInterpolator = variableInterpolator ?? new VariableInterpolator();
             loggerFactory = loggerFactory ?? LogProvider.GetLogger;
 
-            var responseHandler = (responseHandlerFactory ?? ((x1, x2) => new ResponseHandler(x1, x2)))(ioFactory, messageSerializer);
+            var responseHandler = (responseHandlerFactory ?? ((x1, x2) => new ResponseHandler(x1, x2)))(fileSystem, messageSerializer);
 
-            IOFactory = ioFactory;
+            FileSystem = fileSystem;
             MessageSerializer = messageSerializer;
             RequestMatcher = requestMatcher;
             ResponseHandler = responseHandler;
@@ -31,7 +31,7 @@ namespace Impostor.Support {
             LoggerFactory = loggerFactory;
         }
 
-        [NotNull] public IIOFactory IOFactory { get; private set; }
+        [NotNull] public IFileSystem FileSystem { get; private set; }
         [NotNull] public MessageSerializer MessageSerializer { get; private set; }
         [NotNull] public RequestMatcher RequestMatcher { get; private set; }
         [NotNull] public VariableInterpolator VariableInterpolator { get; set; }

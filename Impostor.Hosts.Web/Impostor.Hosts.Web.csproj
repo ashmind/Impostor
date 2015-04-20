@@ -92,9 +92,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Settings.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Settings.yaml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Requests\" />
